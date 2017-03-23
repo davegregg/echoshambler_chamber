@@ -9,7 +9,7 @@ $(document).ready(function(){
     return $.timeago(date)
   })
 
-  $.ajax({url: 'https://echoshambler.herokuapp.com/grunts', data_type: 'json', method: 'post'})
+  $.ajax({url: 'https://echoshambler.herokuapp.com/grunts', data_type: 'json'})
    .done((response) => {
      $("#grunts").html(template(response))
    })
