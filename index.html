@@ -42,6 +42,33 @@
                  <small class="col-lg-6 text-right">&mdash; {{user.fullname}} (@{{user.username}})</small>
             </article>
           </div>
+          <div id="grunt{{id}}ModalContent" class="hidden">
+            <article class="text-right">
+              <div class="row">
+                <blockquote class="col-lg-10 text-left">{{body}}</blockquote>
+                <img src="{{user.photo_url}}" class="col-lg-2 image-responsive img-circle">
+              </div>
+              <div class="row">
+                <small class="col-lg-6 text-left">{{howlongago created_at}}</small>
+                <small class="col-lg-6 text-right">&mdash; {{user.fullname}} (@{{user.username}})</small>
+              </article>
+            </div>
+            <div id="user{{user.id}}ModalContent" class="hidden">
+              <div class="col-lg-8 col-lg-offset-2">
+                <h3>User Statistics</h3>
+                {{#with user}}
+                <p>
+                  {{fullname}} has grunted {{grunts_count}} many times.
+                </p>
+                <p>
+                  {{creepers_count}} people are creeping on {{fullname}}.
+                </p>
+                <p>
+                  {{fullname}} is creeping in turn on {{creepees_count}} people.
+                </p>
+                {{/with}}
+              </div>
+            </div>
         {{/each}}
       </script>
 
