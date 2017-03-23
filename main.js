@@ -1,20 +1,20 @@
 $(document).ready(function() {
 
-    var source = $("#grunts-template").html()
-    var template = Handlebars.compile(source)
-    var errors_source = $("#errors-template").html()
-    var errors_template = Handlebars.compile(errors_source)
+    var template         = Handlebars.compile(   $("#grunts-template").html()   )
+    var errors_template  = Handlebars.compile(   $("#errors-template").html()   )
+    var modals_template  = Handlebars.compile(   $("#modals-template").html()   )
 
     Handlebars.registerHelper("howlongago", (date) => {
         return $.timeago(date)
     })
 
+    var aryGrunts = new Array()
     $.get({
             url: 'https://echoshambler.herokuapp.com/grunts',
             data_type: 'json'
         })
         .done((response) => {
-            $("#grunts").html(template(response))
+          $("#grunts").html(template(response))
         })
         .fail((status, textStatus, xhr) => {
             error = {
@@ -24,4 +24,26 @@ $(document).ready(function() {
             }
             $("#grunts").html(errors_template(error))
         })
+        .then((response) => {
+          modals_data = {
+            modal: [
+              {
+                kind: 'user',
+                title: 'User',
+                body: 'This is the user body.'
+              },
+              {
+                kind: 'grunt',
+                title: 'Grunt',
+                body: 'This is the grunt body.'
+              }
+            ]
+          }
+
+          modals_data.modal.forEach((modal) => {
+            $('#modals').html(modals_template(modals_data))
+          })
+
+        })
+
 })
